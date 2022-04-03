@@ -40,7 +40,8 @@ INSTALLED_APPS = [
 
     #local
     'accounts', 
-    'pages'
+    'pages', 
+    'issues'
 ]
 
 MIDDLEWARE = [
@@ -54,6 +55,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'config.urls'
+LOGOUT_REDIRECT_URL = 'home'
 
 
 TEMPLATES = [

@@ -21,7 +21,7 @@ class TenantSignupForm(UserCreationForm):
     @transaction.atomic
     def save(self): 
         user = super().save(commit=False)
-        user.is_Tenant = True
+        user.is_tenant = True
         user.save()
         tenant = TenantProfile.objects.create(user=user)
         
@@ -36,7 +36,7 @@ class LandlordSignupForm(UserCreationForm):
     @transaction.atomic
     def save(self): 
         user = super().save(commit=False)
-        user.is_Landlord = True
+        user.is_landlord = True
         user.save()
         landlord = LandlordProfile.objects.create(user=user)
 
