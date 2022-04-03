@@ -28,4 +28,20 @@ def SignUpViewLandlord(request):
 
 @login_required
 def ProfileView(request): 
-    return render(request,'tenant/tenant_profile.html')
+    user = request.user
+
+    if user.is_tenant: 
+        return redirect('tenantProfile')
+
+    
+    return redirect('landlordProfile')
+
+@login_required
+def LandlordProfileView(request): 
+
+    return render(request,'landlord/landlord_profile.html',{'user':request.user})
+
+@login_required
+def TenantProfileView(request): 
+
+    return render(request,'tenant/tenant_profile.html',{'user':request.user})

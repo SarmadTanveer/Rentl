@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Issue{% endblock title %}
+
+{% block content %}
+
+<h2>Create an Issue</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type = "submit">Create</button>
+</form>
+
+{% endblock content %}
