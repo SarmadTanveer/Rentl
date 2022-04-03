@@ -1,8 +1,10 @@
 from django.db import models
 from django.urls import reverse
 from datetime import datetime
+from accounts.models import User
 
 class Listing(models.Model):
+    owner = models.ForeignKey(User,null=True, blank=True, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
     city = models.CharField(max_length=100)
