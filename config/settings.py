@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     #local
     'accounts', 
     'pages', 
-    'issues'
+    'issues', 
+    'propertyManagement'
 ]
 
 MIDDLEWARE = [
