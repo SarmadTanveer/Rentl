@@ -4,6 +4,10 @@ from datetime import datetime
 from accounts.models import User
 
 class Listing(models.Model):
+
+    class Meta: 
+        permissions = (("can_edit","Update Listing"),("can_delete", "Delete Listing"),("can_create", "Create Listing"),)
+
     owner = models.ForeignKey(User,null=False, blank=False, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     address = models.CharField(max_length=200,null=True, blank=True)
@@ -25,6 +29,7 @@ class Listing(models.Model):
     photo5 = models.ImageField(upload_to='photos/%Y/%m/%d', blank=True)
     photo6 = models.ImageField(upload_to='photos/%Y/%m/%d', blank=True)
     is_published = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True)
     list_data = models.DateTimeField(default=datetime.now, blank=True)
 
     def __str__(self):
