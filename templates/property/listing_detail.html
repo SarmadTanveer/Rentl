@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="listing-entry">
+<h2>{{ listing.title }}</h2>
+{% if listing.main_photot %}
+<img src="{{listing.main_photo.url}}" width="300" height="300">
+<img src="{{listing.photo1.url}}" width="300" height="300">
+<img src="{{listing.photo2.url}}" width="300" height="300">
+<img src="{{listing.photo3.url}}" width="300" height="300">
+<img src="{{listing.photo4.url}}" width="300" height="300">
+<img src="{{listing.photo5.url}}" width="300" height="300">
+<img src="{{listing.photo6.url}}" width="300" height="300">
+{% endif %}
+<div class="row py-2 text-secondary">
+    <div class="col-6">
+      <i class="fas fa-th-large"></i> Sqft: {{ listing.sqft }}
+    </div>
+    <div class="col-6">
+      <i class="fas fa-car"></i> Garage: {{ listing.garage }}
+    </div>
+  </div>
+  <div class="row py-2 text-secondary">
+    <div class="col-6">
+      <i class="fas fa-bed"></i> Bedrooms: {{ listing.bedrooms }}
+    </div>
+    <div class="col-6">
+      <i class="fas fa-bath"></i> Bathrooms: {{ listing.bathrooms }}
+    </div>
+  </div>
+<p>Description:{{ listing.description }}</p>
+</div>
+<p><a href= "{% url 'listing_edit' listing.pk %}">+ Edit Listing</a></p>
+<p><a href= "{% url 'listing_delete' listing.pk %}">+ Delete Listing</a></p>
+<p><a href= "{% url 'home' %}">Return to Homepage</a></p>
+{% endblock content %}

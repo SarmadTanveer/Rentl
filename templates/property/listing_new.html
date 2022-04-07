@@ -1,0 +1,8 @@
+{% extends 'base.html' %}  <!--inherit from base template-->
+{% block content %}
+<h1>New Property</h1>
+<form action="" method="post" enctype="multipart/form-data">{% csrf_token %}    <!-- form tags with POST method since sending data. If receiving use GET. crsf_token to protect from cross-site forgery-->
+    {{form.as_p}}                                 <!-- Output form data within a paragraph-->
+    <input type="submit" value="Save">            <!-- Specify input type of submit and assign it the value 'Save'-->          
+</form>
+{% endblock content %}

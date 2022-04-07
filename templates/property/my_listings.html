@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Lisitings{% endblock title %}
+
+{% block content %}
+<h1>Listings</h1>
+<a href="/propertymanagement/listing/new">Add a new Listing</a>
+{% if listings %}
+<ul>
+    {% for listing in object_list  %}
+        <li>
+            <div class ="listing-entry">
+                <h2><a href="{% url 'listing_detail' listing.pk %}">{{listing.title}}</a></h2>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card listing-preview">
+                    <img class="card-img-top" src="" alt="" width="200" height="200"/>
+                <div class="card-img-overlay">
+                    <h2>
+                    <span class="badge badge-secondary text-white"
+                        >${{ listing.price }}</span>
+                    </h2>
+                </div>
+                    <div class="col-6">
+                        <i class="fas fa-th-large"></i> Sqft: {{ listing.sqft }}
+                    </div>
+                    <div class="col-6">
+                        <i class="fas fa-car"></i> Garage: {{ listing.garage }}
+                    </div>
+                    </div>
+                    <div class="col-6">
+                        <i class="fas fa-bed"></i> Bedrooms: {{ listing.bedrooms }}
+                        </div>
+                        <div class="col-6">
+                        <i class="fas fa-bath"></i> Bathrooms: {{ listing.bathrooms }}
+                    </div>
+            </div>
+            </li>
+    {% endfor %}
+</ul>
+ {% else %}
+    <p>You dont have any listings</p>
+ {% endif %}
+{% endblock content %}
