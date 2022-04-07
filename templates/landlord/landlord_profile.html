@@ -1,12 +1,33 @@
 {% extends 'base.html' %}
 
-{% block title %}About Us{% endblock title %}
+{% block title %}Home Page{% endblock title %}
 
 {% block content %}
-<h1>Landlord Profile</h1>
+<div class="profilePage" >
+    <h1>{{ user.first_name}} {{user.last_name}}</h1>
 
+    <div class="ProfilePic">
 
-<p>{{ user.first_name}} {{user.last_name}}</p>
-<a href="/accounts/logout">Log out</a>
+    </div>
+    
+    <div class="Revenue">
+
+    </div>
+
+    <div class="Expenses">
+
+    </div>
+
+    <div class="Navigation">
+        <button type="button" ><a href="/propertymanagement/viewlistings">My Listings</a></button>
+        <button type="button" ><a href="/propertymanagement/viewtenants">My Tenants</a></button>
+        <button type="button" ><a href="/propertymanagement/viewissues">Issues</a></button>
+        <button type="button" ><a href="/propertymanagement/viewinquiries">Inquiries</a></button>
+        <button><a href="/accounts/logout">Log out</a></button>
+    
+    </div>
+    
+    
+</div>
 
 {% endblock content %}
