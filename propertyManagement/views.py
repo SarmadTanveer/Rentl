@@ -2,13 +2,14 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import (CreateView, UpdateView, DeleteView)
 from django.urls import reverse_lazy
+from django.shortcuts import render
 from .models import Listing
 
 class PropertyListView(LoginRequiredMixin, ListView):
     model = Listing
     context_object_name = 'listings'
     
-    template_name = 'property/listings.html'
+    template_name = 'property/my_listings.html'
 
     def get_queryset(self):
         query = None
@@ -49,3 +50,6 @@ class PropertyDeleteView(LoginRequiredMixin,PermissionRequiredMixin,DeleteView):
     template_name = 'property/listing_delete.html'
     permission_required = ('propertyManagement.can_delete')
     success_url = reverse_lazy('listings')
+
+def CreateLeaseView(request): 
+    return render(request,template_name='propertymanagment/create_lease.html' )

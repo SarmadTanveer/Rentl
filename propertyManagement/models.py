@@ -1,7 +1,8 @@
+from pyexpat import model
 from django.db import models
 from django.urls import reverse
 from datetime import datetime
-from accounts.models import User
+from accounts.models import User,LandlordProfile, TenantProfile
 
 class Listing(models.Model):
 
@@ -15,7 +16,7 @@ class Listing(models.Model):
     state = models.CharField(max_length=100,null=True, blank=True)
     zipcode = models.CharField(max_length=20,null=True, blank=True)
     description = models.TextField(null=True, blank=True)
-    price = models.IntegerField(null=True, blank=True)
+    price = models.FloatField(null=True, blank=True)
     bedrooms = models.IntegerField(null=True, blank=True)
     bathrooms = models.DecimalField(max_digits=2, decimal_places=1,null=True, blank=True)
     garage = models.IntegerField(default=0,null=True, blank=True)
@@ -37,4 +38,16 @@ class Listing(models.Model):
     
     def get_absolute_url(self):
         return reverse("listing_detail", args=[str(self.id)])
+
+
+class LeaseOffPlatform(models.Model): 
+    listing = models.OneToOneField(Listing, on_delete=models.CASCADE, primary_key=True)
+    landlord = models.ForeignKey(LandlordProfile, on_delete=models.CASCADE)
+    tenant_lastName = models.CharField(max_length=50)
+    tenant_contact = models.IntegerField()
+    tenant_firstName = models.CharField(max_length=50)
+    leaseStartDate = models.DateField(auto_now=False,auto_now_add=False)
+    leaseEndDate = models.DateField(auto_now=False,auto_now_add=False)
+    Rent = models.DecimalField(max_digits=10,decimal_places=2)
+    leaseDocument = models.FileField(upload_to='uploads/')
 # Create your models here.
