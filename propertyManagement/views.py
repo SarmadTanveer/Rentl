@@ -1,3 +1,4 @@
+from re import template
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import (CreateView, UpdateView, DeleteView)
@@ -30,7 +31,7 @@ class PropertyCreateView(LoginRequiredMixin,PermissionRequiredMixin,CreateView):
     fields = ['title', 'address', 'city', 'state', 'zipcode', 'description', 
     'price', 'bedrooms', 'bathrooms', 'garage', 'sqft', 'main_photo',
      'photo1', 'photo2', 'photo3','photo4', 'photo5', 
-    'photo6', 'is_published', 'list_data' ] 
+    'photo6', 'List', 'list_data' ] 
 
     def form_valid(self,form): 
         form.instance.owner = self.request.user
@@ -43,7 +44,7 @@ class PropertyUpdateView(LoginRequiredMixin,PermissionRequiredMixin,UpdateView):
     fields = ['title', 'address', 'city', 'state', 'zipcode', 'description', 
     'price', 'bedrooms', 'bathrooms', 'garage', 'sqft', 'main_photo',
      'photo1', 'photo2', 'photo3','photo4', 'photo5', 
-    'photo6', 'is_published', 'is_active','list_data' ] 
+    'photo6', 'List', 'is_active','list_data' ] 
 
 class PropertyDeleteView(LoginRequiredMixin,PermissionRequiredMixin,DeleteView): # new
     model = Listing
@@ -51,5 +52,13 @@ class PropertyDeleteView(LoginRequiredMixin,PermissionRequiredMixin,DeleteView):
     permission_required = ('propertyManagement.can_delete')
     success_url = reverse_lazy('listings')
 
-def CreateLeaseView(request): 
-    return render(request,template_name='propertymanagment/create_lease.html' )
+class CreateLeaseView(LoginRequiredMixin,PermissionRequiredMixin,UpdateView): 
+    model = Listing
+    template_name = 'property/create_lease.html'
+    permission_required = ('propertyManagement.can_Lease')
+    success_url = reverse_lazy('listings')
+    fields = ['tenantFirstName', 'tenantLastName','tenantPicture','lease', 'otherdocument1','otherdocument2','otherdocument3']
+
+    def post(self,request,**kwargs): 
+        listing = self.get_object()
+        

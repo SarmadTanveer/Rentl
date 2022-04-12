@@ -16,7 +16,6 @@ urlpatterns = [
     path('listing/new/', PropertyCreateView.as_view(), name = 'listing_new'),
     path('listing/<int:pk>/', PropertyDetailView.as_view(), name='listing_detail'), # new
     path('viewlistings/', PropertyListView.as_view(), name='listings'),
-    path('createLease/',CreateLeaseView, name='createLease'),
-    path('createOffPlatformLease/',CreateLeaseView,name='createOffPlatformLease')
+    path('createLease/<int:pk>/',CreateLeaseView.as_view(), name='createLease'),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -7,7 +7,7 @@ from accounts.models import User,LandlordProfile, TenantProfile
 class Listing(models.Model):
 
     class Meta: 
-        permissions = (("can_edit","Update Listing"),("can_delete", "Delete Listing"),("can_create", "Create Listing"),)
+        permissions = (("can_edit","Update Listing"),("can_delete", "Delete Listing"),("can_create", "Create Listing"),("can_Lease","Can Lease"))
 
     owner = models.ForeignKey(User,null=False, blank=False, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
@@ -29,9 +29,21 @@ class Listing(models.Model):
     photo4 = models.ImageField(upload_to='photos/%Y/%m/%d', blank=True)
     photo5 = models.ImageField(upload_to='photos/%Y/%m/%d', blank=True)
     photo6 = models.ImageField(upload_to='photos/%Y/%m/%d', blank=True)
-    is_published = models.BooleanField(default=True)
+    List = models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)
     list_data = models.DateTimeField(default=datetime.now, blank=True)
+
+    #Fields related to listing 
+    tenantFirstName = models.CharField(max_length=50, null=True, blank=False)
+    tenantLastName = models.CharField(max_length=50, null=True, blank=False) 
+    tenantPicture =  models.ImageField(upload_to='photos/tenants/%Y/%m/%d', blank=True)
+
+    lease = models.FileField(upload_to='Docs/lease/{self.id}',null=True, blank=False)
+
+    otherdocument1 = models.FileField(upload_to=f'Docs/other/',null=True, blank=True)
+    otherdocument2 = models.FileField(upload_to=f'Docs/other/',null=True, blank=True)
+    otherdocument3 = models.FileField(upload_to=f'Docs/other/',null=True, blank=True)
+
 
     def __str__(self):
         return self.title
@@ -39,15 +51,5 @@ class Listing(models.Model):
     def get_absolute_url(self):
         return reverse("listing_detail", args=[str(self.id)])
 
-
-class LeaseOffPlatform(models.Model): 
-    listing = models.OneToOneField(Listing, on_delete=models.CASCADE, primary_key=True)
-    landlord = models.ForeignKey(LandlordProfile, on_delete=models.CASCADE)
-    tenant_lastName = models.CharField(max_length=50)
-    tenant_contact = models.IntegerField()
-    tenant_firstName = models.CharField(max_length=50)
-    leaseStartDate = models.DateField(auto_now=False,auto_now_add=False)
-    leaseEndDate = models.DateField(auto_now=False,auto_now_add=False)
-    Rent = models.DecimalField(max_digits=10,decimal_places=2)
-    leaseDocument = models.FileField(upload_to='uploads/')
+        
 # Create your models here.

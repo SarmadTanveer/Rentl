@@ -43,8 +43,13 @@ INSTALLED_APPS = [
     'accounts', 
     'pages', 
     'issues', 
-    'propertyManagement'
+    'propertyManagement',
+
+    #3rd party
+    'crispy_forms'
 ]
+
+CRSIPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -1,5 +1,4 @@
 from django.contrib import admin
-from .models import Listing,LeaseOffPlatform
+from .models import Listing
 
 admin.site.register(Listing)
-admin.site.register(LeaseOffPlatform)
