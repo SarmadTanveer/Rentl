@@ -1,0 +1,70 @@
+bedroom_choices={
+
+    '1':1,
+    '2':2,
+    '3':3,
+    '4':4,
+    '5':5,
+    '6':6,
+    '7':7,
+    '8':8,
+    '9':9,
+    '10':10,
+}
+
+price_choices={
+    '1000':'$1,000',
+    '2000':'$2,000',
+    '3000':'$3,000',
+    '4000':'$4,000',
+    '5000':'$5,000',
+    '7000':'$7,000',
+    '6000':'$6,000',
+    '8000':'$8,000',
+    '9000':'$9,000',
+    '10000':'$10K+',
+
+}
+
+state_choices={
+    'AK':'Alaska',
+    'AL':'Alabama',
+    'AK':'Arkansas',
+    'AS':'American Samoa',
+    'AZ':'Arizona',
+    'CA':'California',
+    'CO':'Colorado',
+    'CT':'Connecticut',
+    'DC':'District of COlumbia',
+    'DE':'Delaware',
+    'FL':'Florida',
+    'GA':'Georgia',
+    'GU':'Guam',
+    'HI':'Hawaii',
+    'IA':'Idaho',
+    'ID':'District of COlumbia',
+    'IL':'Illinois',
+    'IN':'Indiana',
+    'KS':'Kansas',
+    'KY':'Kentucky',
+    'LA':'Louisiana',
+    'MA':'Massachusetts',
+    'MD':'Maryland',
+    'ME':'Maine',
+    'MI':'Michigan',
+    'NM':'New Mexico',
+    'NV':'Nevada',
+    'ON':'Ontario',
+    'AB':'Alberta',
+    'BC': 'British Columbia',
+    'QB':'Quebec',
+    'SK':'Saskatchewan',
+    'MB':'Manitoba',
+    'NB':'New Brunswick',
+    'NS':'Nova Scotia',
+    'NL':'Newfoundland and Labrador',
+    'PEI':'Prince Edward Island',
+
+    
+
+}
