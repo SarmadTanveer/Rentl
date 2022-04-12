@@ -2,7 +2,8 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from .views import (
-PropertyListView, 
+PropertyListView,
+PropertyGenView, 
 PropertyDetailView, 
 PropertyCreateView, 
 PropertyUpdateView,
@@ -12,7 +13,7 @@ DeleteLeaseView,
 LeaseDetailView, 
 LeaseListView
 )
-
+from . import views
 urlpatterns = [
     path('listing/<int:pk>/delete/', PropertyDeleteView.as_view(), name='listing_delete'),
     path('listing/<int:pk>/edit/', PropertyUpdateView.as_view(), name='listing_edit'),
@@ -22,6 +23,8 @@ urlpatterns = [
     path('createLease/',CreateLeaseView.as_view(), name='createLease'),
     path('deleteLease/<int:pk>/',DeleteLeaseView.as_view(), name='deleteLease'),
     path('leasedetails/<int:pk>/',LeaseDetailView.as_view(), name='leaseDetail'), 
-    path('viewleases/', LeaseListView.as_view(), name='leases')
+    path('viewleases/', LeaseListView.as_view(), name='leases'),
+    path('search/', views.search, name='search'),
+    path('listings/', PropertyGenView.as_view(), name='generallistings')
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

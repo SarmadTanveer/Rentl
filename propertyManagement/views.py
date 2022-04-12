@@ -3,6 +3,7 @@ from re import template
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import (CreateView, UpdateView, DeleteView)
+from .options import price_choices, bedroom_choices, state_choices
 from django.urls import reverse_lazy
 from django.shortcuts import redirect, render
 from .models import Listing, Lease
@@ -66,7 +67,11 @@ class CreateLeaseView(LoginRequiredMixin,CreateView):
     success_url = reverse_lazy('landlordProfile')
     fields = ['Listing','tenantFirstName', 'tenantLastName','tenantPicture','lease', 'otherdocument1','otherdocument2','otherdocument3']
     
-
+class PropertyGenView( ListView):
+    model = Listing
+    context_object_name = 'generallistings'
+    
+    template_name = 'property/listings.html'
     
 
 class DeleteLeaseView(LoginRequiredMixin, DeleteView): 
@@ -90,4 +95,47 @@ class LeaseListView(LoginRequiredMixin,ListView):
         return context
 
 
+def search(request):
+    queryset_list=Listing.objects.order_by('-list_data')
+
+    #keywords
+    if 'keywords' in request.GET:
+        keywords = request.GET['keywords']
+        if keywords:
+            queryset_list = queryset_list.filter(description__icontains = keywords)
+        
+   #City
+    if 'city' in request.GET:
+        city = request.GET['city']
+        if city:
+            queryset_list=queryset_list.filter(city__iexact = city)
+
+     #State
+    if 'state' in request.GET:
+        state = request.GET['state']
+        if state:
+            queryset_list=queryset_list.filter(city__iexact = state)
+    
+    
+     # Bedrooms
+    if 'bedrooms' in request.GET:
+        bedrooms = request.GET['bedrooms']
+        if bedrooms:
+            queryset_list=queryset_list.filter(bedrooms__lte=bedrooms)
+        
+     # Price
+    if 'price' in request.GET:
+        price = request.GET['price']
+        if price:
+            queryset_list=queryset_list.filter(price__lte=price)
+                
+    context={
+        'state_choices':state_choices,
+        'bedroom_choices':bedroom_choices,
+        'price_choices':price_choices,
+        'listings':queryset_list,
+        'values':request.GET,
+    }
+
+    return render(request, 'property/search.html', context)
 
