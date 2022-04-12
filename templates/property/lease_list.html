@@ -1,0 +1,44 @@
+{% extends 'landlord/landlord_profile.html' %}
+
+{% block content %}
+<section class="section">
+  <div class="row">
+    <div class="col-lg-12">
+
+      <div class="card">
+        <div class="card-body">
+          <!-- Table with stripped rows -->
+          <table class="table datatable">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Property</th>
+                <th scope="col">Tenant First Name</th>
+                <th scope="col">Tenant Last Name</th>
+                <th scope="col">Lease Doc</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for lease in leases%}
+              <tr>
+                <td>{{lease.pk}}</td>
+                <td>{{lease.listing}}</td>
+                <td>{{lease.tenantFirstName}}</td>
+                <td>{{lease.tenantLastName}}</td>
+                <td>{{lease.lease}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <!-- End Table with stripped rows -->
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+{% endblock content %}

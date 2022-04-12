@@ -7,7 +7,10 @@ PropertyDetailView,
 PropertyCreateView, 
 PropertyUpdateView,
 PropertyDeleteView,
-CreateLeaseView
+CreateLeaseView, 
+DeleteLeaseView, 
+LeaseDetailView, 
+LeaseListView
 )
 
 urlpatterns = [
@@ -16,6 +19,9 @@ urlpatterns = [
     path('listing/new/', PropertyCreateView.as_view(), name = 'listing_new'),
     path('listing/<int:pk>/', PropertyDetailView.as_view(), name='listing_detail'), # new
     path('viewlistings/', PropertyListView.as_view(), name='listings'),
-    path('createLease/<int:pk>/',CreateLeaseView.as_view(), name='createLease'),
+    path('createLease/',CreateLeaseView.as_view(), name='createLease'),
+    path('deleteLease/<int:pk>/',DeleteLeaseView.as_view(), name='deleteLease'),
+    path('leasedetails/<int:pk>/',LeaseDetailView.as_view(), name='leaseDetail'), 
+    path('viewleases/', LeaseListView.as_view(), name='leases')
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
