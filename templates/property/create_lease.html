@@ -1,0 +1,21 @@
+{% extends 'landlord/landlord_profile.html' %}  <!--inherit from base template-->
+{% load crispy_forms_tags %}
+{% block content %}
+<h1>Create Lease</h1>
+<div class="card">
+    <div class="card-body">
+        <h1 class="card-title-a">Property: {{listing.title}}</h1>
+        {% if listing.tenantFirstName %}
+        <h3 class="text-danger">This Property already has a lease. Please delete the lease in order to create a new one</h3>
+        {% else %}
+        <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}    <!-- form tags with POST method since sending data. If receiving use GET. crsf_token to protect from cross-site forgery-->
+        {{form|crispy}}                                 <!-- Output form data within a paragraph-->
+        <button type="submit" class="btn btn-success mt-5">Create Lease</button>            <!-- Specify input type of submit and assign it the value 'Save'-->          
+        </form>
+        {% endif %}
+
+      
+
+    </div>
+  </div>
+{% endblock content %}

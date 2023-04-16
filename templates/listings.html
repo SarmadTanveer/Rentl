@@ -1,0 +1,61 @@
+{%extends 'base.html' %}
+{% block content %}
+<section class="property-grid grid ">
+    <div class="container">
+      <div class="row">
+        {% if listings %}
+        {% for listing in object_list  %}
+        <div class="col-md-4">
+          <div class="card-box-a card-shadow">
+            <div class="img-box-a">
+              <img src="{{ listing.main_photo.url }}" alt="" class="img-a img-fluid">
+            </div>
+            <div class="card-overlay">
+              <div class="card-overlay-a-content">
+                <div class="card-header-a">
+                  <h2 class="card-title-a">
+                    <a href="{% url 'listing_detail' listing.pk %}">{{listing.title}}</a>
+                  </h2>
+                </div>
+                <div class="card-body-a">
+                  <div class="price-box d-flex">
+                    <span class="price-a">rent | $ {{listing.price}}</span>
+                  </div>
+                  <a href="{% url 'listing_detail' listing.pk %}" class="link-a">Click here to view
+                    <span class="bi bi-chevron-right"></span>
+                  </a>
+                </div>
+                <div class="card-footer-a">
+                  <ul class="card-info d-flex justify-content-around">
+                    <li>
+                      <h4 class="card-info-title">Area</h4>
+                      <span>{{listing.sqft}} ft
+                        <sup>2</sup>
+                      </span>
+                    </li>
+                    <li>
+                      <h4 class="card-info-title">Beds</h4>
+                      <span>{{ listing.bedrooms }}</span>
+                    </li>
+                    <li>
+                      <h4 class="card-info-title">Baths</h4>
+                      <span>{{ listing.bathrooms }}</span>
+                    </li>
+                    <li>
+                      <h4 class="card-info-title">Garages</h4>
+                      <span>{{listing.garage}}</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>No Listings Available</p>
+        {% endif %}
+      </div>
+    </div>
+  </section><!-- End Property Grid Single-->
+{% endblock content %}

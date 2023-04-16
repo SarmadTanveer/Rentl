@@ -1,0 +1,16 @@
+{% extends 'landlord/landlord_profile.html' %}  <!--inherit from base template-->
+{% load crispy_forms_tags %}
+{% block content %}
+<h1>New Property</h1>
+<div class="card">
+    <div class="card-body">
+      <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}    <!-- form tags with POST method since sending data. If receiving use GET. crsf_token to protect from cross-site forgery-->
+        {{form|crispy}}                                 <!-- Output form data within a paragraph-->
+        <button type="submit" class="btn btn-success">Save</button>            <!-- Specify input type of submit and assign it the value 'Save'-->          
+    </form>
+      
+
+    </div>
+  </div>
+
+{% endblock content %}

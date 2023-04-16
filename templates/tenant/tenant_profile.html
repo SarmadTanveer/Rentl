@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}About Us{% endblock title %}
+
+{% block content %}
+<h1>Tenant Profile</h1>
+<p>{{ user.first_name}} {{user.last_name}}</p>
+<a href="/propertymanagement/viewlistings">View available properties to rent</a>
+<a href="accounts/logout">Log out</a>
+{% endblock content %}

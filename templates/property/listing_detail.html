@@ -1,0 +1,169 @@
+{% extends 'landlord/landlord_profile.html' %}
+{% load static %}
+
+{% block startScripts%}
+<link href="{% static 'assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+<link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+<link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+<!-- Template Main CSS File -->
+<link href="{%static 'assets/css/style.css' %}" rel="stylesheet">
+{%endblock startScripts%}
+
+{% block content %}
+      <div class="col-md-12 col-lg-8">
+        <div class="title-single-box">
+          <h1 class="title-single">{{listing.address}}</h1>
+        </div>
+      </div>
+<!-- ======= Property Single ======= -->
+<section class="property-single nav-arrow-b">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div id="property-single-carousel" class="swiper">
+          <div class="swiper-wrapper">
+            <div class="carousel-item-b swiper-slide">
+              {% if listing.main_photo %}
+              <img src="{{ listing.main_photo.url }}" alt="">
+              {% endif %}
+            </div>
+            {% if listing.photo1 %}
+            <div class="carousel-item-b swiper-slide">
+              <img src="{{ listing.photo1.url }}" alt="">
+            </div>
+            {% endif %}
+          </div>
+        </div>
+        <div class="property-single-carousel-pagination carousel-pagination"></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+
+        <div class="row justify-content-between">
+          <div class="col-md-5 col-lg-4">
+            <div class="property-price d-flex justify-content-center foo">
+              <div class="card-header-c d-flex">
+                <div class="card-box-ico">
+                  <span class="bi bi-cash">${{ listing.price }}</span>
+                </div>
+                <div class="card-title-c align-self-center">
+                  <h5 class="title-c"></h5>
+                </div>
+              </div>
+            </div>
+            <div class="property-summary">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="title-box-d section-t4">
+                    <h3 class="title-d">Quick Summary</h3>
+                  </div>
+                </div>
+              </div>
+              <div class="summary-list">
+                <ul class="list">
+                  <li class="d-flex justify-content-between">
+                    <strong>Property ID:</strong>
+                    <span>{{listing.pk}}</span>
+                  </li>
+                  <li class="d-flex justify-content-between">
+                    <strong>Location:</strong>
+                    <span>{{ listing.address}}</span>
+                  </li>
+                  <li class="d-flex justify-content-between">
+                    <strong>Property Type:</strong>
+                    <span>House</span>
+                  </li>
+                  <li class="d-flex justify-content-between">
+                    <strong>Status:</strong>
+                    
+                    <span>Rented</span>
+
+                    
+                  </li>
+                  <li class="d-flex justify-content-between">
+                    <strong>Area:</strong>
+                    <span>{{listing.sqft}} ft
+                      <sup>2</sup>
+                    </span>
+                  </li>
+                  <li class="d-flex justify-content-between">
+                    <strong>Beds:</strong>
+                    <span>{{listing.bedrooms}}</span>
+                  </li>
+                  <li class="d-flex justify-content-between">
+                    <strong>Baths:</strong>
+                    <span>{{ listing.bathrooms }}</span>
+                  </li>
+                  <li class="d-flex justify-content-between">
+                    <strong>Garage:</strong>
+                    <span>{{listing.garage}}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-7 col-lg-7 section-md-t3">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="title-box-d">
+                  <h3 class="title-d">Property Description</h3>
+                </div>
+              </div>
+            </div>
+            <div class="property-description">
+              <p class="description color-text-a">
+                {{listing.description}}
+              </p>
+            </div>
+            <div class="row section-t3">
+              <div class="col-sm-12">
+                <div class="title-box-d">
+                  <h3 class="title-d">Amenities</h3>
+                </div>
+              </div>
+            </div>
+            <div class="amenities-list color-text-a">
+              <ul class="list-a no-margin">
+                <li>Balcony</li>
+                <li>Outdoor Kitchen</li>
+                <li>Cable Tv</li>
+                <li>Deck</li>
+                <li>Tennis Courts</li>
+                <li>Internet</li>
+                <li>Parking</li>
+                <li>Sun Room</li>
+                <li>Concrete Flooring</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section><!-- End Property Single-->
+{% if perms.propertyManagement.can_edit%}
+<a class= 'btn btn-success' href= "{% url 'listing_edit' listing.pk %}">+ Edit Listing</a>
+{% endif %}
+
+{% if perms.propertyManagement.can_delete%}
+<a class= 'btn btn-success' href= "{% url 'listing_delete' listing.pk %}">- Delete Listing</a>
+{% endif %}
+
+<p><a href= "{% url 'home' %}">Return to Homepage</a></p>
+{% endblock content %}
+
+{% block scripts %}
+ <!-- Vendor JS Files -->
+ <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+ <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+ <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+ <!-- Template Main JS File -->
+ <script src="{%static 'assets/js/main.js' %}"></script>
+{% endblock scripts %}
